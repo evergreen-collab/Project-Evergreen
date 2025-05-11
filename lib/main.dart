@@ -10,7 +10,7 @@ class EvergreenApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Project: Evergreen',
+      title: 'JoyNest',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
@@ -33,20 +33,25 @@ class EvergreenHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
+        leadingWidth: 80,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          // Placeholder logo as a simple Icon
-          child: CircleAvatar(
-            backgroundColor: Colors.teal[100],
-            child: const Icon(Icons.eco, color: Colors.teal, size: 28),
+          child: Image.asset(
+            'assets/JoyNest.png',
+            height: 100,
+            width: 100,
+            semanticLabel: 'Logo',
           ),
         ),
         title: const Text(
-          'Project: Evergreen',
+          'JoyNest',
           style: TextStyle(
+            fontFamily: 'Salisbury',
             fontWeight: FontWeight.bold,
-            fontSize: 22,
-            letterSpacing: 1.1,
+            fontSize: 35,
+            color: Colors.orangeAccent,
+            letterSpacing: 0,
           ),
         ),
         centerTitle: true,
@@ -70,15 +75,53 @@ class EvergreenHomePage extends StatelessWidget {
               crossAxisCount: 3,
               mainAxisSpacing: padding,
               crossAxisSpacing: padding,
-              children: List.generate(9, (index) {
-                return EvergreenGridButton(
-                  icon: Icons.widgets, // Placeholder icon
-                  label: 'Button ${index + 1}',
-                  onTap: () {
-                    // TODO: Add button action
-                  },
-                );
-              }),
+              children: [
+                EvergreenGridButton(
+                  icon: Icons.ondemand_video,
+                  label: 'Video Entertainment',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.spa,
+                  label: 'Wellness & Relax',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.videogame_asset,
+                  label: 'Games',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.public,
+                  label: 'Travel &  Culture',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.sports_soccer,
+                  label: 'Sports & Activity',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.people,
+                  label: 'Family & Friends',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.photo_library,
+                  label: 'Memories',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.medication,
+                  label: 'Health & Medication',
+                  onTap: () {},
+                ),
+                EvergreenGridButton(
+                  icon: Icons.emergency,
+                  label: 'Help & Emergency',
+                  onTap: () {},
+                ),
+              ],
             ),
           ),
         ),
@@ -117,6 +160,10 @@ class EvergreenGridButton extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.teal[50],
+                border: Border.all(
+                  color: Colors.teal, // Border color
+                  width: 3,                   // Border thickness
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.teal.withValues(alpha: 0.08),
