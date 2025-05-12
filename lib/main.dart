@@ -33,14 +33,14 @@ class EvergreenHomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
-        leadingWidth: 80,
+        toolbarHeight: 200,
+        leadingWidth: 180,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Image.asset(
             'assets/JoyNest.png',
-            height: 100,
-            width: 100,
+            height: 200,
+            width: 200,
             semanticLabel: 'Logo',
           ),
         ),
@@ -49,7 +49,7 @@ class EvergreenHomePage extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'Salisbury',
             fontWeight: FontWeight.bold,
-            fontSize: 35,
+            fontSize: 80,
             color: Colors.orangeAccent,
             letterSpacing: 0,
           ),
@@ -58,6 +58,7 @@ class EvergreenHomePage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
+            iconSize: 50,
             tooltip: 'Settings',
             onPressed: () {
               // TODO: Open settings in the future
@@ -77,49 +78,58 @@ class EvergreenHomePage extends StatelessWidget {
               crossAxisSpacing: padding,
               children: [
                 EvergreenGridButton(
-                  icon: Icons.ondemand_video,
-                  label: 'Video Entertainment',
+                  icon: Icons.health_and_safety_rounded,
+                  label: 'Health & Wellness',
                   onTap: () {},
+                  color: Colors.teal,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.spa,
-                  label: 'Wellness & Relax',
-                  onTap: () {},
-                ),
-                EvergreenGridButton(
-                  icon: Icons.videogame_asset,
+                  icon: Icons.videogame_asset_rounded,
                   label: 'Games',
                   onTap: () {},
+                  color: Colors.deepOrange,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.public,
-                  label: 'Travel &  Culture',
+                  icon: Icons.video_call_rounded,
+                  label: 'Video Call',
                   onTap: () {},
+                  color: Colors.blue,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.sports_soccer,
-                  label: 'Sports & Activity',
+                  icon: Icons.photo_library_rounded,
+                  label: 'Photos',
                   onTap: () {},
+                  color: Colors.purple,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.people,
-                  label: 'Family & Friends',
+                  icon: Icons.airplanemode_on_rounded,
+                  label: 'Travel &   Sports',
                   onTap: () {},
+                  color: Colors.green,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.photo_library,
-                  label: 'Memories',
+                  icon: Icons.ondemand_video_rounded,
+                  label: 'Video &    Music',
                   onTap: () {},
+                  color: Colors.deepOrangeAccent,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.medication,
-                  label: 'Health & Medication',
-                  onTap: () {},
-                ),
-                EvergreenGridButton(
-                  icon: Icons.emergency,
+                  icon: Icons.emergency_rounded,
                   label: 'Help & Emergency',
                   onTap: () {},
+                  color: Colors.redAccent,
+                ),
+                EvergreenGridButton(
+                  icon: Icons.medication_rounded,
+                  label: 'Medication',
+                  onTap: () {},
+                  color: Colors.teal,
+                ),
+                EvergreenGridButton(
+                  icon: Icons.people_rounded,
+                  label: 'Contacts',
+                  onTap: () {},
+                  color: Colors.blue,
                 ),
               ],
             ),
@@ -133,23 +143,27 @@ class EvergreenHomePage extends StatelessWidget {
 class EvergreenGridButton extends StatelessWidget {
   final IconData icon;
   final String label;
+  final Color color;
   final VoidCallback onTap;
 
   const EvergreenGridButton({
     super.key,
     required this.icon,
     required this.label,
+    required this.color,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Make the button square and responsive
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = constraints.biggest.shortestSide;
+        final isLight = ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+        final iconTextColor = isLight ? Colors.black87 : Colors.white;
+
         return Material(
-          color: Colors.teal[50],
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(20),
           child: InkWell(
             onTap: onTap,
@@ -159,30 +173,26 @@ class EvergreenGridButton extends StatelessWidget {
               height: size,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.teal[50],
-                border: Border.all(
-                  color: Colors.teal, // Border color
-                  width: 3,                   // Border thickness
-                ),
+                color: color,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.teal.withValues(alpha: 0.08),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
+                    color: color.withValues(alpha: 0.08),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size: size * 0.38, color: Colors.teal[400]),
+                  Icon(icon, size: size * 0.38, color: iconTextColor),
                   const SizedBox(height: 12),
                   Text(
                     label,
                     style: TextStyle(
                       fontSize: size * 0.14,
                       fontWeight: FontWeight.w600,
-                      color: Colors.teal[900],
+                      color: iconTextColor,
                     ),
                     textAlign: TextAlign.center,
                   ),
