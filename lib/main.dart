@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'health_wellness.dart';
+import 'app_bar.dart';
 
 void main() {
   runApp(const EvergreenApp());
@@ -32,41 +34,7 @@ class EvergreenHomePage extends StatelessWidget {
     final padding = MediaQuery.of(context).size.shortestSide * 0.04;
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 200,
-        leadingWidth: 180,
-        leading: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Image.asset(
-            'assets/JoyNest.png',
-            height: 200,
-            width: 200,
-            semanticLabel: 'Logo',
-          ),
-        ),
-        title: const Text(
-          'JoyNest',
-          style: TextStyle(
-            fontFamily: 'Salisbury',
-            fontWeight: FontWeight.bold,
-            fontSize: 80,
-            color: Colors.orangeAccent,
-            letterSpacing: 0,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            iconSize: 50,
-            tooltip: 'Settings',
-            onPressed: () {
-              // TODO: Open settings in the future
-            },
-          ),
-        ],
-        elevation: 0,
-      ),
+      appBar: const JoyNestAppBar(showBackButton: false),
       body: Padding(
         padding: EdgeInsets.all(padding),
         child: Center(
@@ -80,7 +48,13 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.health_and_safety_rounded,
                   label: 'Health & Wellness',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const HealthWellnessPage(),
+                      ),
+                    );
+                  },
                   color: Colors.teal,
                 ),
                 EvergreenGridButton(
@@ -159,7 +133,8 @@ class EvergreenGridButton extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = constraints.biggest.shortestSide;
-        final isLight = ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+        final isLight =
+            ThemeData.estimateBrightnessForColor(color) == Brightness.light;
         final iconTextColor = isLight ? Colors.black87 : Colors.white;
 
         return Material(
