@@ -19,8 +19,12 @@ class EvergreenGridButton extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final size = constraints.biggest.shortestSide;
-        final isLight =
-            ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+        final backgroundColor = color.withValues(alpha: 1);
+
+        // Calculate perceived brightness (Luma formula)
+        final luminance = backgroundColor.computeLuminance();
+        final isLight = luminance > 0.5;
+
         final iconTextColor = isLight ? Colors.black87 : Colors.white;
 
         return Material(
@@ -30,14 +34,12 @@ class EvergreenGridButton extends StatelessWidget {
             onTap: onTap,
             borderRadius: BorderRadius.circular(20),
             child: Container(
-              width: size,
-              height: size,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: color,
+                color: backgroundColor,
                 boxShadow: [
                   BoxShadow(
-                    color: color.withValues(alpha: 0.08),
+                    color: backgroundColor.withValues(alpha: 0.2),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -46,14 +48,17 @@ class EvergreenGridButton extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size: size * 0.38, color: iconTextColor),
+                  Icon(icon,
+                    size: size * 0.38,
+                    color: iconTextColor.withValues(alpha: 0.9),
+                  ),
                   const SizedBox(height: 12),
                   Text(
                     label,
                     style: TextStyle(
                       fontSize: size * 0.14,
                       fontWeight: FontWeight.w600,
-                      color: iconTextColor,
+                      color: iconTextColor.withValues(alpha: 0.9),
                     ),
                     textAlign: TextAlign.center,
                   ),
