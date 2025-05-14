@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'health_wellness.dart';
-import 'games.dart';
-import 'app_bar.dart';
+import 'pages/health_wellness_page.dart';
+import 'pages/games_page.dart';
+import 'widgets/joy_nest_app_bar.dart';
+import 'widgets/evergreen_grid_button.dart';
 
 void main() {
   runApp(const EvergreenApp());
@@ -117,73 +118,6 @@ class EvergreenHomePage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class EvergreenGridButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color color;
-  final VoidCallback onTap;
-
-  const EvergreenGridButton({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final size = constraints.biggest.shortestSide;
-        final isLight =
-            ThemeData.estimateBrightnessForColor(color) == Brightness.light;
-        final iconTextColor = isLight ? Colors.black87 : Colors.white;
-
-        return Material(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
-          child: InkWell(
-            onTap: onTap,
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              width: size,
-              height: size,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: color,
-                boxShadow: [
-                  BoxShadow(
-                    color: color.withValues(alpha: 0.08),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(icon, size: size * 0.38, color: iconTextColor),
-                  const SizedBox(height: 12),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      fontSize: size * 0.14,
-                      fontWeight: FontWeight.w600,
-                      color: iconTextColor,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }

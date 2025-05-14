@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_bar.dart';
+import '../widgets/joy_nest_app_bar.dart';
 
 class HealthWellnessPage extends StatelessWidget {
   const HealthWellnessPage({super.key});
