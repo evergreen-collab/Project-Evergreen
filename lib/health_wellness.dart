@@ -13,9 +13,11 @@ class HealthWellnessPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Daily Summary',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            const Center(
+              child: Text(
+                'Daily Summary',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 20),
             Card(

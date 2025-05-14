@@ -1,31 +1,8 @@
 import 'package:flutter/material.dart';
-import 'health_wellness.dart';
-import 'games.dart';
 import 'app_bar.dart';
 
-void main() {
-  runApp(const EvergreenApp());
-}
-
-class EvergreenApp extends StatelessWidget {
-  const EvergreenApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'JoyNest',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        useMaterial3: true,
-      ),
-      home: const EvergreenHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class EvergreenHomePage extends StatelessWidget {
-  const EvergreenHomePage({super.key});
+class GamesPage extends StatelessWidget {
+  const GamesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +12,7 @@ class EvergreenHomePage extends StatelessWidget {
     final padding = MediaQuery.of(context).size.shortestSide * 0.04;
 
     return Scaffold(
-      appBar: const JoyNestAppBar(showBackButton: false),
+      appBar: const JoyNestAppBar(showBackButton: true),
       body: Padding(
         padding: EdgeInsets.all(padding),
         child: Center(
@@ -47,68 +24,20 @@ class EvergreenHomePage extends StatelessWidget {
               crossAxisSpacing: padding,
               children: [
                 EvergreenGridButton(
-                  icon: Icons.health_and_safety_rounded,
-                  label: 'Health & Wellness',
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const HealthWellnessPage(),
-                      ),
-                    );
-                  },
+                  icon: Icons.grid_3x3_outlined,
+                  label: 'Tic Tac Toe',
+                  onTap: () {},
                   color: Colors.teal,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.videogame_asset_rounded,
-                  label: 'Games',
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const GamesPage(),
-                      ),
-                    );
-                  },
+                  icon: Icons.crop_square,
+                  label: 'Memory',
+                  onTap: () {},
                   color: Colors.deepOrange,
                 ),
                 EvergreenGridButton(
-                  icon: Icons.video_call_rounded,
-                  label: 'Video Call',
-                  onTap: () {},
-                  color: Colors.blue,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.photo_library_rounded,
-                  label: 'Photos',
-                  onTap: () {},
-                  color: Colors.purple,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.airplanemode_on_rounded,
-                  label: 'Travel &   Sports',
-                  onTap: () {},
-                  color: Colors.green,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.ondemand_video_rounded,
-                  label: 'Video &    Music',
-                  onTap: () {},
-                  color: Colors.deepOrangeAccent,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.emergency_rounded,
-                  label: 'Help & Emergency',
-                  onTap: () {},
-                  color: Colors.redAccent,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.medication_rounded,
-                  label: 'Medication',
-                  onTap: () {},
-                  color: Colors.teal,
-                ),
-                EvergreenGridButton(
-                  icon: Icons.people_rounded,
-                  label: 'Contacts',
+                  icon: Icons.question_mark,
+                  label: 'Higher lower game',
                   onTap: () {},
                   color: Colors.blue,
                 ),
