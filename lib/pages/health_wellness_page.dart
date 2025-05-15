@@ -4,7 +4,6 @@ import '../widgets/joy_nest_app_bar.dart';
 import 'package:flutter/services.dart';
 import '../providers/settings_provider.dart';
 
-
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: false);
   if (settings.darkMode && !settings.highContrast) {
@@ -84,9 +83,11 @@ class _HealthWellnessPageState extends State<HealthWellnessPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Daily Summary',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            Center(
+              child: const Text(
+                'Daily Summary',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 20),
 
