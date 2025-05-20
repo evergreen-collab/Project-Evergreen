@@ -37,7 +37,7 @@ dependencies:
   provider: ^6.1.2
   color_blindness: ^0.2.0
   flutter_contacts: ^1.1.9+2
-
+  video_player: ^2.8.2
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +64,7 @@ flutter:
     - assets/images/JoyNest.png
     - assets/images/rectangle_porto.jpg
     - assets/images/square_porto.jpg
+    - assets/videos/sample_video.mp4
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

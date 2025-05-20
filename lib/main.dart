@@ -1,4 +1,5 @@
 import 'package:evergreen/pages/photos_page.dart';
+import 'package:evergreen/pages/video_music_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:color_blindness/color_blindness.dart';
@@ -177,7 +178,13 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.ondemand_video_rounded,
                   label: 'Video & Music',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const VideoMusicPage(),
+                      ),
+                    );
+                  },
                   color: getGridButtonColor(context, Colors.deepOrangeAccent),
                 ),
                  EvergreenGridButton(
