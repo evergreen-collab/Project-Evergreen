@@ -13,6 +13,57 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: ListView(
         children: [
+          // Log In Button
+          ListTile(
+            title: Text('Log In', style: Theme.of(context).textTheme.bodyLarge),
+            trailing: ElevatedButton(
+              child: const Text('Log In'),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    // Controllers for text fields
+                    final usernameController = TextEditingController();
+                    final passwordController = TextEditingController();
+                    return AlertDialog(
+                      title: const Text('Log In'),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextField(
+                            controller: usernameController,
+                            decoration: const InputDecoration(
+                              labelText: 'Username',
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          TextField(
+                            controller: passwordController,
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                            ),
+                            obscureText: true,
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          child: const Text('Cancel'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                        ElevatedButton(
+                          child: const Text('Log In'),
+                          onPressed: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+
+          // Existing settings switches and dropdown
           SwitchListTile(
             title: Text('Dark Mode', style: Theme.of(context).textTheme.bodyLarge),
             value: settings.darkMode,
@@ -30,7 +81,7 @@ class SettingsPage extends StatelessWidget {
           ),
           ListTile(
             title: Text('Language', style: Theme.of(context).textTheme.bodyLarge),
-            trailing: DropdownButton<String>(
+            trailing: DropdownButton(
               style: Theme.of(context).textTheme.bodyLarge,
               value: settings.locale,
               items: const [
