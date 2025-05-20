@@ -2,7 +2,7 @@ import 'package:evergreen/pages/photos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:color_blindness/color_blindness.dart';
-
+import 'package:evergreen/pages/travel_sport.dart';
 import 'pages/health_wellness_page.dart';
 import 'pages/games_page.dart';
 import 'pages/videocall_page.dart';
@@ -163,7 +163,13 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.airplanemode_on_rounded,
                   label: 'Travel & Sports',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const TravelSport(),
+                      ),
+                    );
+                  },
                   color: getGridButtonColor(context, Colors.green),
                 ),
                 EvergreenGridButton(
