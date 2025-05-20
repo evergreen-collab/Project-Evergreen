@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class PhotoItem extends StatelessWidget {
-  final List<String> imageUrls; // List of image URLs
-  final int currentIndex; // Current index of the image
+  final List<String> imageUrls;
+  final int currentIndex;
 
   const PhotoItem({
     Key? key,
@@ -34,44 +35,102 @@ class PhotoItem extends StatelessWidget {
     );
   }
 
-  // Helper method to build the image dialog
   Widget _buildImageDialog(
     BuildContext context,
     List<String> imageUrls,
     int index,
   ) {
+    final maxWidth = MediaQuery.of(context).size.width * 0.9;
+    final maxHeight = MediaQuery.of(context).size.height * 0.8;
+
     return Dialog(
-      backgroundColor: Colors.transparent, // Make the background transparent
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Image with arrows on sides
-              Stack(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.all(20),
+      child: Center(
+        child: FutureBuilder<ImageInfo>(
+          future: _getImageInfo(imageUrls[index]),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData) {
+              final imageInfo = snapshot.data!;
+              final aspectRatio =
+                  imageInfo.image.width / imageInfo.image.height;
+
+              // Compute constrained size based on max width/height while preserving aspect ratio
+              double displayWidth = maxWidth;
+              double displayHeight = displayWidth / aspectRatio;
+
+              if (displayHeight > maxHeight) {
+                displayHeight = maxHeight;
+                displayWidth = displayHeight * aspectRatio;
+              }
+
+              return Stack(
+                alignment: Alignment.center,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      imageUrls[index],
-                      fit: BoxFit.cover,
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      height: MediaQuery.of(context).size.width * 0.6,
-                    ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Image
+                      ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12),
+                        ),
+                        child: SizedBox(
+                          width: displayWidth,
+                          height: displayHeight,
+                          child: Image.network(
+                            imageUrls[index],
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+
+                      // Bottom-only white bar
+                      Container(
+                        width: displayWidth,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 16,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          ),
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton.icon(
+                            onPressed: () => Navigator.of(context).pop(),
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.grey.shade200,
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 12,
+                              ),
+                            ),
+                            icon: const Icon(Icons.close, color: Colors.black),
+                            label: const Text(
+                              'Close',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  // Left Arrow
+
+                  // Left arrow
                   Positioned(
                     left: 8,
-                    top: 0,
-                    bottom: 0,
                     child: IconButton(
-                      iconSize: 36,
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(Icons.arrow_left, color: Colors.white),
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.black.withOpacity(0.5),
-                        shape: const CircleBorder(),
+                      icon: const Icon(
+                        Icons.arrow_left,
+                        size: 36,
+                        color: Colors.white,
                       ),
                       onPressed: () {
                         if (index > 0) {
@@ -89,18 +148,15 @@ class PhotoItem extends StatelessWidget {
                       },
                     ),
                   ),
-                  // Right Arrow
+
+                  // Right arrow
                   Positioned(
                     right: 8,
-                    top: 0,
-                    bottom: 0,
                     child: IconButton(
-                      iconSize: 36,
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(Icons.arrow_right, color: Colors.white),
-                      style: IconButton.styleFrom(
-                        backgroundColor: Colors.black.withOpacity(0.5),
-                        shape: const CircleBorder(),
+                      icon: const Icon(
+                        Icons.arrow_right,
+                        size: 36,
+                        color: Colors.white,
                       ),
                       onPressed: () {
                         if (index < imageUrls.length - 1) {
@@ -119,41 +175,24 @@ class PhotoItem extends StatelessWidget {
                     ),
                   ),
                 ],
-              ),
-
-              // Bottom "white border" container with Close button
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.vertical(
-                    bottom: Radius.circular(8),
-                  ),
-                ),
-                child: Center(
-                  child: ElevatedButton.icon(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close),
-                    label: const Text(
-                      'Close',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
+  }
+
+  // Gets the image info to calculate the aspect ratio
+  Future<ImageInfo> _getImageInfo(String url) async {
+    final completer = Completer<ImageInfo>();
+    final image = NetworkImage(url);
+    final stream = image.resolve(const ImageConfiguration());
+    stream.addListener(
+      ImageStreamListener((info, _) => completer.complete(info)),
+    );
+    return completer.future;
   }
 }
