@@ -140,7 +140,9 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.video_call_rounded,
                   label: 'Video Call',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/videocall');
+                  },
                   color: getGridButtonColor(context, Colors.blue),
                 ),
                 EvergreenGridButton(
