@@ -17,10 +17,10 @@ class _VideocallPageState extends State<VideocallPage> {
   bool _loaded = false;
 
   final List<SampleContact> _sampleContacts = [
-    SampleContact(name: 'John Doe', phone: '+1 555 123 4567'),
-    SampleContact(name: 'Jane Smith', phone: '+1 555 987 6543'),
-    SampleContact(name: 'Alice Johnson', phone: '+1 555 222 3344'),
-    SampleContact(name: 'Bob Williams', phone: '+1 555 333 4455'),
+    SampleContact(name: 'Jonathan Snow', phone: '+44 555 123 4567'),
+    SampleContact(name: 'Bruno Diaz', phone: '+1 555 987 6543'),
+    SampleContact(name: 'Gerold Riviera', phone: '+48 555 222 3344'),
+    SampleContact(name: 'James T. Curt', phone: '+1 555 333 4455'),
   ];
 
   @override

@@ -10,6 +10,7 @@ import 'widgets/joy_nest_app_bar.dart';
 import 'widgets/evergreen_grid_button.dart';
 import 'pages/settings_page.dart';
 import 'providers/settings_provider.dart';
+import 'pages/emergency_page.dart';
 
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: true);
@@ -88,6 +89,7 @@ class EvergreenApp extends StatelessWidget {
           routes: {
             '/settings': (context) => const SettingsPage(),
             '/videocall': (context) => const VideocallPage(),
+            '/emergency': (context) => const EmergencyPage(),
           },
         );
       },
@@ -178,12 +180,12 @@ class EvergreenHomePage extends StatelessWidget {
                   onTap: () {},
                   color: getGridButtonColor(context, Colors.deepOrangeAccent),
                 ),
-                EvergreenGridButton(
-                  icon: Icons.emergency_rounded,
-                  label: 'Help & Emergency',
-                  onTap: () {},
-                  color: getGridButtonColor(context, Colors.red),
-                ),
+                 EvergreenGridButton(
+                   icon: Icons.emergency_rounded,
+                   label: 'Help & Emergency',
+                   onTap: () => Navigator.pushNamed(context, '/emergency'),
+                   color: getGridButtonColor(context, Colors.red),
+                 ),
                 EvergreenGridButton(
                   icon: Icons.medication_rounded,
                   label: 'Medication',
