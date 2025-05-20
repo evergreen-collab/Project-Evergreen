@@ -1,7 +1,6 @@
 import 'package:evergreen/widgets/photo_item.dart';
 import 'package:flutter/material.dart';
 import '../widgets/joy_nest_app_bar.dart';
-import '../widgets/photo_item.dart'; // Import the PhotoItem widget
 
 class PhotosPage extends StatelessWidget {
   const PhotosPage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class PhotosPage extends StatelessWidget {
         MediaQuery.of(context).size.shortestSide * 0.02; // Reduced padding
 
     return Scaffold(
-      appBar: JoyNestAppBar(showBackButton: true),
+      appBar: const JoyNestAppBar(showBackButton: true),
       body: Padding(
         padding: EdgeInsets.all(padding),
         child: GridView.builder(
@@ -37,8 +36,11 @@ class PhotosPage extends StatelessWidget {
           itemCount: photos.length,
           itemBuilder: (context, index) {
             return PhotoItem(
-              imageUrl: photos[index]['url']!,
-              label: photos[index]['label']!,
+              imageUrls:
+                  photos
+                      .map((photo) => photo['url']!)
+                      .toList(), // Pass the list of image URLs
+              currentIndex: index, // Pass the current index
             );
           },
         ),

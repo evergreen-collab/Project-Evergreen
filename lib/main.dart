@@ -1,20 +1,18 @@
+import 'package:evergreen/pages/photos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:color_blindness/color_blindness.dart';
-
 import 'pages/health_wellness_page.dart';
 import 'pages/games_page.dart';
-import 'pages/photos_page.dart';
-import 'pages/settings_page.dart';
-import 'pages/videocall_page.dart';
-import 'providers/settings_provider.dart';
 import 'widgets/joy_nest_app_bar.dart';
 import 'widgets/evergreen_grid_button.dart';
+import 'pages/settings_page.dart';
+import 'providers/settings_provider.dart';
 
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: true);
-
   if (settings.darkMode && !settings.highContrast) {
+    // Use lighter variants for dark mode
     if (color == Colors.teal) return Colors.teal[200]!;
     if (color == Colors.deepOrange) return Colors.deepOrange[200]!;
     if (color == Colors.blue) return Colors.lightBlue[200]!;
@@ -51,7 +49,7 @@ class EvergreenApp extends StatelessWidget {
           useMaterial3: true,
         );
 
-        // Color blindness support
+        // Color blindness support (unchanged)
         if (settings.colorBlindMode) {
           baseTheme = baseTheme.copyWith(
             colorScheme: colorBlindnessColorScheme(
@@ -71,12 +69,13 @@ class EvergreenApp extends StatelessWidget {
               displayColor: Colors.white,
               decorationColor: Colors.white,
             ),
+            // Optionally, set icon color globally if needed:
             iconTheme: const IconThemeData(color: Colors.white),
           );
         } else if (settings.darkMode) {
           // Dark mode (not high contrast)
           baseTheme = baseTheme.copyWith(
-            scaffoldBackgroundColor: const Color(0xFF23272F),
+            scaffoldBackgroundColor: const Color(0xFF23272F), // dark grey
           );
         }
 
@@ -85,11 +84,7 @@ class EvergreenApp extends StatelessWidget {
           theme: baseTheme,
           home: const EvergreenHomePage(),
           debugShowCheckedModeBanner: false,
-          routes: {
-            '/settings': (context) => const SettingsPage(),
-            '/videocall': (context) => const VideocallPage(),
-            // Add other routes as needed
-          },
+          routes: {'/settings': (context) => const SettingsPage()},
         );
       },
     );
@@ -101,6 +96,7 @@ class EvergreenHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use MediaQuery to determine orientation and size
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final padding = MediaQuery.of(context).size.shortestSide * 0.04;
@@ -144,9 +140,7 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.video_call_rounded,
                   label: 'Video Call',
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/videocall');
-                  },
+                  onTap: () {},
                   color: getGridButtonColor(context, Colors.blue),
                 ),
                 EvergreenGridButton(
@@ -163,13 +157,13 @@ class EvergreenHomePage extends StatelessWidget {
                 ),
                 EvergreenGridButton(
                   icon: Icons.airplanemode_on_rounded,
-                  label: 'Travel & Sports',
+                  label: 'Travel &   Sports',
                   onTap: () {},
                   color: getGridButtonColor(context, Colors.green),
                 ),
                 EvergreenGridButton(
                   icon: Icons.ondemand_video_rounded,
-                  label: 'Video & Music',
+                  label: 'Video &    Music',
                   onTap: () {},
                   color: getGridButtonColor(context, Colors.deepOrangeAccent),
                 ),
