@@ -2,7 +2,7 @@ name: evergreen
 description: "Elderly entertainment platform"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -53,23 +53,20 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   fonts:
     - family: Salisbury
       fonts:
         - asset: assets/fonts/SalisburyBold.ttf
 
   assets:
-    - assets/JoyNest.png
+    - assets/images/JoyNest.png
+    - assets/images/rectangle_porto.jpg
+    - assets/images/square_porto.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
-
-
 
   # To add assets to your application, add an assets section, like this:
   # assets:

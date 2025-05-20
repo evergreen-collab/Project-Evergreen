@@ -20,9 +20,6 @@ Color getGridButtonColor(BuildContext context, Color color) {
   return color;
 }
 
-
-
-
 class GamesPage extends StatelessWidget {
   const GamesPage({super.key});
 
@@ -37,35 +34,48 @@ class GamesPage extends StatelessWidget {
       appBar: const JoyNestAppBar(showBackButton: true),
       body: Padding(
         padding: EdgeInsets.all(padding),
-        child: Center(
-          child: AspectRatio(
-            aspectRatio: isLandscape ? 3 / 2 : 1,
-            child: GridView.count(
-              crossAxisCount: 3,
-              mainAxisSpacing: padding,
-              crossAxisSpacing: padding,
-              children: [
-                EvergreenGridButton(
-                  icon: Icons.grid_3x3_outlined,
-                  label: 'Tic Tac Toe',
-                  onTap: () {},
-                  color: getGridButtonColor(context, Colors.teal),
-                ),
-                EvergreenGridButton(
-                  icon: Icons.crop_square,
-                  label: 'Memory',
-                  onTap: () {},
-                  color: getGridButtonColor(context, Colors.deepOrange),
-                ),
-                EvergreenGridButton(
-                  icon: Icons.question_mark,
-                  label: 'Higher lower game',
-                  onTap: () {},
-                  color: getGridButtonColor(context, Colors.blue),
-                ),
-              ],
+        child: Column(
+          children: [
+            Center(
+              child: const Text(
+                'Games',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
+            const SizedBox(height: 20), // Space between text and buttons
+            Expanded(
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: isLandscape ? 3 / 2 : 1,
+                  child: GridView.count(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: padding,
+                    crossAxisSpacing: padding,
+                    children: [
+                      EvergreenGridButton(
+                        icon: Icons.grid_3x3_outlined,
+                        label: 'Tic Tac Toe',
+                        onTap: () {},
+                        color: getGridButtonColor(context, Colors.teal),
+                      ),
+                      EvergreenGridButton(
+                        icon: Icons.crop_square,
+                        label: 'Memory',
+                        onTap: () {},
+                        color: getGridButtonColor(context, Colors.deepOrange),
+                      ),
+                      EvergreenGridButton(
+                        icon: Icons.question_mark,
+                        label: 'Higher lower game',
+                        onTap: () {},
+                        color: getGridButtonColor(context, Colors.blue),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

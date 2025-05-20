@@ -1,3 +1,4 @@
+import 'package:evergreen/pages/photos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:color_blindness/color_blindness.dart';
@@ -40,7 +41,6 @@ class EvergreenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<SettingsProvider>(
       builder: (context, settings, _) {
-
         ThemeData baseTheme = ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.teal,
@@ -49,7 +49,7 @@ class EvergreenApp extends StatelessWidget {
           useMaterial3: true,
         );
 
-// Color blindness support (unchanged)
+        // Color blindness support (unchanged)
         if (settings.colorBlindMode) {
           baseTheme = baseTheme.copyWith(
             colorScheme: colorBlindnessColorScheme(
@@ -59,7 +59,7 @@ class EvergreenApp extends StatelessWidget {
           );
         }
 
-// High contrast mode
+        // High contrast mode
         if (settings.highContrast) {
           baseTheme = baseTheme.copyWith(
             scaffoldBackgroundColor: Colors.black,
@@ -84,9 +84,7 @@ class EvergreenApp extends StatelessWidget {
           theme: baseTheme,
           home: const EvergreenHomePage(),
           debugShowCheckedModeBanner: false,
-          routes: {
-            '/settings': (context) => const SettingsPage(),
-          },
+          routes: {'/settings': (context) => const SettingsPage()},
         );
       },
     );
@@ -148,7 +146,13 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.photo_library_rounded,
                   label: 'Photos',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const PhotosPage(),
+                      ),
+                    );
+                  },
                   color: getGridButtonColor(context, Colors.purple),
                 ),
                 EvergreenGridButton(

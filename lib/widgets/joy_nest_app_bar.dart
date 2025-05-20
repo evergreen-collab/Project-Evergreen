@@ -16,21 +16,22 @@ class JoyNestAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       toolbarHeight: 200,
       leadingWidth: 180,
-      leading: showBackButton
-          ? IconButton(
-        icon: const Icon(Icons.arrow_back, size: 40),
-        onPressed: onBack ?? () => Navigator.of(context).pop(),
-        tooltip: 'Back',
-      )
-          : Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: Image.asset(
-          'assets/JoyNest.png',
-          height: 200,
-          width: 200,
-          semanticLabel: 'Logo',
-        ),
-      ),
+      leading:
+          showBackButton
+              ? IconButton(
+                icon: const Icon(Icons.arrow_back, size: 40),
+                onPressed: onBack ?? () => Navigator.of(context).pop(),
+                tooltip: 'Back',
+              )
+              : Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Image.asset(
+                  'assets/images/JoyNest.png',
+                  height: 200,
+                  width: 200,
+                  semanticLabel: 'Logo',
+                ),
+              ),
       title: const Text(
         'JoyNest',
         style: TextStyle(
@@ -54,16 +55,19 @@ class JoyNestAppBar extends StatelessWidget implements PreferredSizeWidget {
                 width: 80,
                 height: 80,
                 child: Material(
-                  color: isDark && !isHighContrast
-                      ? const Color(0xFF424242) // Dark grey
-                      : Colors.orangeAccent,
+                  color:
+                      isDark && !isHighContrast
+                          ? const Color(0xFF424242) // Dark grey
+                          : Colors.orangeAccent,
                   shape: const CircleBorder(),
                   elevation: 4,
                   child: IconButton(
-                    icon: Icon(Icons.settings,
-                      color: isDark && !isHighContrast
-                          ? Colors.orangeAccent
-                          : Colors.white,
+                    icon: Icon(
+                      Icons.settings,
+                      color:
+                          isDark && !isHighContrast
+                              ? Colors.orangeAccent
+                              : Colors.white,
                     ),
                     iconSize: 50,
                     tooltip: 'Settings',
