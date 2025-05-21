@@ -19,26 +19,38 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
 
   final List<Map<String, dynamic>> videoHighlights = [
     {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'title': 'Sunset Walk',
-      'videoUrl': 'assets/videos/sample_video.mp4',
+      'thumbnail': 'assets/images/another_fish.png',
+      'title': 'Friendly fish',
+      'videoUrl': 'assets/videos/another_fish.mp4',
     },
     {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'title': 'City Life',
-      'videoUrl': 'assets/videos/sample_video.mp4',
+      'thumbnail': 'assets/images/color_palete.png',
+      'title': 'Paint picking',
+      'videoUrl': 'assets/videos/color_palete.mp4',
     },
     {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'title': 'Nature Walk',
+      'thumbnail': 'assets/images/sample.png',
+      'title': 'Globe',
       'videoUrl': 'assets/videos/sample_video.mp4',
     },
   ];
 
   final List<Map<String, dynamic>> allVideos = [
     {
-      'thumbnail': 'assets/images/JoyNest.png',
+      'thumbnail': 'assets/images/fish_catch.png',
+      'videoUrl': 'assets/videos/catch_fish.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/sample.png',
       'videoUrl': 'assets/videos/sample_video.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/studio.png',
+      'videoUrl': 'assets/videos/studio_video.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/another_fish.png',
+      'videoUrl': 'assets/videos/another_fish.mp4',
     },
     {
       'thumbnail': 'assets/images/JoyNest.png',
@@ -49,20 +61,8 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
       'videoUrl': 'assets/videos/sample_video.mp4',
     },
     {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'videoUrl': 'assets/videos/sample_video.mp4',
-    },
-    {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'videoUrl': 'assets/videos/sample_video.mp4',
-    },
-    {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'videoUrl': 'assets/videos/sample_video.mp4',
-    },
-    {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'videoUrl': 'assets/videos/sample_video.mp4',
+      'thumbnail': 'assets/images/color_palete.png',
+      'videoUrl': 'assets/videos/color_palete.mp4',
     },
   ];
 

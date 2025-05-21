@@ -68,7 +68,19 @@ flutter:
     - assets/images/JoyNest.png
     - assets/images/rectangle_porto.jpg
     - assets/images/square_porto.jpg
+    - assets/images/sample.png
+    - assets/images/another_fish.png
+    - assets/images/color_palete.png
+    - assets/images/microscope.png
+    - assets/images/studio.png
+    - assets/images/fish_catch.png
+    - assets/videos/catch_fish.mp4
     - assets/videos/sample_video.mp4
+    - assets/videos/studio_video.mp4
+    - assets/videos/another_fish.mp4
+    - assets/videos/color_palete.mp4
+    - assets/videos/misroscope.mp4
+    - assets/videos/studio_video.mp4
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
