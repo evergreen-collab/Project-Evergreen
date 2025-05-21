@@ -42,6 +42,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   video_thumbnail: ^0.5.3
   path_provider: ^2.1.2
+  stroke_text: any
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stroke_text/stroke_text.dart';
 import '../widgets/joy_nest_app_bar.dart';
 import '../providers/settings_provider.dart';
 
@@ -105,20 +106,11 @@ class PhotoItem extends StatelessWidget {
               Positioned(
                 bottom: 4,
                 left: 4,
-                child: Text(
-                  'Photo ${currentIndex + 1}',
-                  style: TextStyle(
-                    color: textColor ?? Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 3,
-                        color: Colors.black.withValues(alpha: 0.5),
-                        offset: Offset(1, 1),
-                      ),
-                    ],
-                  ),
+                child: StrokeText(
+                  text: 'Photo ${currentIndex + 1}',
+                  textStyle: TextStyle(fontSize: 14, color: Colors.white),
+                  strokeColor: Colors.black,
+                  strokeWidth: 2,
                 ),
               ),
             ],
@@ -197,7 +189,12 @@ class FullscreenPhotoDialogState extends State<FullscreenPhotoDialog> {
                 shadows: [
                   Shadow(
                     blurRadius: 6,
-                    color: Colors.black.withValues(alpha: 0.7),
+                    color: const Color.fromARGB(
+                      255,
+                      255,
+                      255,
+                      255,
+                    ).withValues(alpha: 0.7),
                     offset: Offset(2, 2),
                   ),
                 ],
