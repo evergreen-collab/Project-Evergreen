@@ -68,6 +68,11 @@ flutter:
     - assets/images/JoyNest.png
     - assets/images/rectangle_porto.jpg
     - assets/images/square_porto.jpg
+    - assets/images/landscape1.png
+    - assets/images/landscape2.png
+    - assets/images/landscape3.png
+    - assets/images/landscape4.png
+    - assets/images/landscape5.png
     - assets/images/sample.png
     - assets/images/another_fish.png
     - assets/images/color_palete.png

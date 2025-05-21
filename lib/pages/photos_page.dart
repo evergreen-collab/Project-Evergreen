@@ -15,10 +15,11 @@ class PhotosPage extends StatelessWidget {
     final List<Map<String, String>> photos = [
       {'url': 'assets/images/JoyNest.png', 'label': 'Photo 1'},
       {'url': 'assets/images/rectangle_porto.jpg', 'label': 'Photo 2'},
-      {'url': 'assets/images/square_porto.jpg', 'label': 'Photo 3'},
-      {'url': 'assets/images/rectangle_porto.jpg', 'label': 'Photo 4'},
-      {'url': 'assets/images/square_porto.jpg', 'label': 'Photo 5'},
-      {'url': 'assets/images/JoyNest.png', 'label': 'Photo 6'},
+      {'url': 'assets/images/landscape1.png', 'label': 'Photo 3'},
+      {'url': 'assets/images/landscape2.png', 'label': 'Photo 4'},
+      {'url': 'assets/images/landscape3.png', 'label': 'Photo 5'},
+      {'url': 'assets/images/landscape4.png', 'label': 'Photo 6'},
+      {'url': 'assets/images/landscape5.png', 'label': 'Photo 7'},
     ];
 
     final isLandscape =
