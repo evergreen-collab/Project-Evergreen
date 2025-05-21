@@ -164,6 +164,7 @@ class Medication {
   final String amount;
   final List<String> schedule;
   DateTime? lastTaken;
+  bool isTakenNow = false;
 
   Medication({
     required this.name,
@@ -173,6 +174,7 @@ class Medication {
 
   void markAsTaken() {
     lastTaken = DateTime.now();
+    isTakenNow = true;
   }
 
   void simulateLastTaken() {
@@ -187,7 +189,7 @@ class Medication {
         return;
       }
     }
-    lastTaken = now.subtract(const Duration(hours: 1));
+    lastTaken = null; // never taken
   }
 
   String get nextTime {
@@ -228,70 +230,82 @@ class MedicationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        decoration: BoxDecoration(
-          color: containerColor,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: const BoxDecoration(
-                color: Colors.teal,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+    return Opacity(
+      opacity: medication.isTakenNow ? 0.5 : 1.0,
+      child: Card(
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          decoration: BoxDecoration(
+            color: containerColor,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: const BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    const Text('💊 ', style: TextStyle(fontSize: 18)),
+                    Text(
+                      medication.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  const Text('💊 ', style: TextStyle(fontSize: 18)),
-                  Text(
-                    medication.name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '💊 Amount: ${medication.amount}',
+                      style: const TextStyle(fontSize: 16),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '💊 Amount: ${medication.amount}',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    '⏱️ Last taken: ${medication.lastTaken != null ? DateFormat('HH:mm').format(medication.lastTaken!) : 'Never'}',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Text(
-                    '⏰ Next scheduled: ${medication.nextTime}',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(value: false, onChanged: (_) => onTaken()),
-                      const Text(
-                        "Mark as taken now",
-                        style: TextStyle(fontSize: 16),
+                    Text(
+                      '⏱️ Last taken: ${medication.lastTaken != null ? DateFormat('HH:mm').format(medication.lastTaken!) : 'Not taken yet'}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    Text(
+                      '⏰ Next scheduled: ${medication.nextTime}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    if (!medication.isTakenNow) ...[
+                      Row(
+                        children: [
+                          Card(
+                            child: TextButton(
+                              onPressed: onTaken,
+                              child: const Text(
+                                "Mark as taken now",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

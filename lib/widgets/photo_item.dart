@@ -46,143 +46,148 @@ class PhotoItem extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.all(20),
-      child: Center(
-        child: FutureBuilder<ImageInfo>(
-          future: _getImageInfo(imageUrls[index]),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done &&
-                snapshot.hasData) {
-              final imageInfo = snapshot.data!;
-              final aspectRatio =
-                  imageInfo.image.width / imageInfo.image.height;
+      child: Card(
+        child: Center(
+          child: FutureBuilder<ImageInfo>(
+            future: _getImageInfo(imageUrls[index]),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.hasData) {
+                final imageInfo = snapshot.data!;
+                final aspectRatio =
+                    imageInfo.image.width / imageInfo.image.height;
 
-              // Compute constrained size based on max width/height while preserving aspect ratio
-              double displayWidth = maxWidth;
-              double displayHeight = displayWidth / aspectRatio;
+                // Compute constrained size based on max width/height while preserving aspect ratio
+                double displayWidth = maxWidth;
+                double displayHeight = displayWidth / aspectRatio;
 
-              if (displayHeight > maxHeight) {
-                displayHeight = maxHeight;
-                displayWidth = displayHeight * aspectRatio;
-              }
+                if (displayHeight > maxHeight) {
+                  displayHeight = maxHeight;
+                  displayWidth = displayHeight * aspectRatio;
+                }
 
-              return Stack(
-                alignment: Alignment.center,
-                children: [
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Image
-                      ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(12),
-                          topRight: Radius.circular(12),
+                return Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Image
+                        ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                          child: SizedBox(
+                            width: displayWidth,
+                            height: displayHeight,
+                            child: Image.network(
+                              imageUrls[index],
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        child: SizedBox(
+
+                        // Bottom-only white bar
+                        Container(
                           width: displayWidth,
-                          height: displayHeight,
-                          child: Image.network(
-                            imageUrls[index],
-                            fit: BoxFit.contain,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 12,
+                            horizontal: 16,
                           ),
-                        ),
-                      ),
-
-                      // Bottom-only white bar
-                      Container(
-                        width: displayWidth,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 16,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(12),
-                          ),
-                        ),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton.icon(
-                            onPressed: () => Navigator.of(context).pop(),
-                            style: TextButton.styleFrom(
-                              backgroundColor: Colors.grey.shade200,
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 8,
-                                horizontal: 12,
-                              ),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(12),
+                              bottomRight: Radius.circular(12),
                             ),
-                            icon: const Icon(Icons.close, color: Colors.black),
-                            label: const Text(
-                              'Close',
-                              style: TextStyle(
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton.icon(
+                              onPressed: () => Navigator.of(context).pop(),
+                              style: TextButton.styleFrom(
+                                backgroundColor: Colors.grey.shade200,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 12,
+                                ),
+                              ),
+                              icon: const Icon(
+                                Icons.close,
                                 color: Colors.black,
-                                fontSize: 22,
+                              ),
+                              label: const Text(
+                                'Close',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 22,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  // Left arrow
-                  Positioned(
-                    left: 8,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_left,
-                        size: 36,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        if (index > 0) {
-                          Navigator.of(context).pop();
-                          showDialog(
-                            context: context,
-                            builder:
-                                (context) => _buildImageDialog(
-                                  context,
-                                  imageUrls,
-                                  index - 1,
-                                ),
-                          );
-                        }
-                      },
+                      ],
                     ),
-                  ),
 
-                  // Right arrow
-                  Positioned(
-                    right: 8,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_right,
-                        size: 36,
-                        color: Colors.white,
+                    // Left arrow
+                    Positioned(
+                      left: 8,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_left,
+                          size: 36,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          if (index > 0) {
+                            Navigator.of(context).pop();
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (context) => _buildImageDialog(
+                                    context,
+                                    imageUrls,
+                                    index - 1,
+                                  ),
+                            );
+                          }
+                        },
                       ),
-                      onPressed: () {
-                        if (index < imageUrls.length - 1) {
-                          Navigator.of(context).pop();
-                          showDialog(
-                            context: context,
-                            builder:
-                                (context) => _buildImageDialog(
-                                  context,
-                                  imageUrls,
-                                  index + 1,
-                                ),
-                          );
-                        }
-                      },
                     ),
-                  ),
-                ],
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
-          },
+
+                    // Right arrow
+                    Positioned(
+                      right: 8,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.arrow_right,
+                          size: 36,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          if (index < imageUrls.length - 1) {
+                            Navigator.of(context).pop();
+                            showDialog(
+                              context: context,
+                              builder:
+                                  (context) => _buildImageDialog(
+                                    context,
+                                    imageUrls,
+                                    index + 1,
+                                  ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
         ),
       ),
     );

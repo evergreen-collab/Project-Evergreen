@@ -21,7 +21,8 @@ class PhotosPage extends StatelessWidget {
       {'url': 'assets/images/JoyNest.png', 'label': 'Photo 6'},
     ];
 
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final padding = MediaQuery.of(context).size.shortestSide * 0.02;
 
     return Scaffold(
@@ -46,10 +47,11 @@ class PhotosPage extends StatelessWidget {
                 onTap: () {
                   showDialog(
                     context: context,
-                    builder: (_) => FullscreenPhotoDialog(
-                      photos: photos,
-                      initialIndex: index,
-                    ),
+                    builder:
+                        (_) => FullscreenPhotoDialog(
+                          photos: photos,
+                          initialIndex: index,
+                        ),
                   );
                 },
               );
@@ -79,45 +81,47 @@ class PhotoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(8),
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: borderColor ?? Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                imageUrls[currentIndex],
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-            ),
-            Positioned(
-              bottom: 4,
-              left: 4,
-              child: Text(
-                'Photo ${currentIndex + 1}',
-                style: TextStyle(
-                  color: textColor ?? Colors.white,
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 3,
-                      color: Colors.black.withValues(alpha: 0.5),
-                      offset: Offset(1, 1),
-                    ),
-                  ],
+    return Card(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            // border: Border.all(color: borderColor ?? Colors.grey, width: 1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  imageUrls[currentIndex],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
                 ),
               ),
-            ),
-          ],
+              Positioned(
+                bottom: 4,
+                left: 4,
+                child: Text(
+                  'Photo ${currentIndex + 1}',
+                  style: TextStyle(
+                    color: textColor ?? Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 3,
+                        color: Colors.black.withValues(alpha: 0.5),
+                        offset: Offset(1, 1),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -166,7 +170,8 @@ class FullscreenPhotoDialogState extends State<FullscreenPhotoDialog> {
   @override
   Widget build(BuildContext context) {
     final String imageUrl = widget.photos[currentIndex]['url']!;
-    final String label = widget.photos[currentIndex]['label'] ?? 'Photo ${currentIndex + 1}';
+    final String label =
+        widget.photos[currentIndex]['label'] ?? 'Photo ${currentIndex + 1}';
 
     return Dialog(
       backgroundColor: Colors.transparent,
@@ -176,9 +181,7 @@ class FullscreenPhotoDialogState extends State<FullscreenPhotoDialog> {
           Container(
             color: Colors.black.withValues(alpha: 0.95),
             child: Center(
-              child: InteractiveViewer(
-                child: Image.asset(imageUrl),
-              ),
+              child: InteractiveViewer(child: Image.asset(imageUrl)),
             ),
           ),
           Positioned(
@@ -213,7 +216,11 @@ class FullscreenPhotoDialogState extends State<FullscreenPhotoDialog> {
             left: 16,
             top: MediaQuery.of(context).size.height / 2 - 24,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios, size: 48, color: currentIndex > 0 ? Colors.white : Colors.white54),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                size: 48,
+                color: currentIndex > 0 ? Colors.white : Colors.white54,
+              ),
               onPressed: currentIndex > 0 ? _goToPrevious : null,
               tooltip: 'Previous photo',
             ),
@@ -223,8 +230,16 @@ class FullscreenPhotoDialogState extends State<FullscreenPhotoDialog> {
             right: 16,
             top: MediaQuery.of(context).size.height / 2 - 24,
             child: IconButton(
-              icon: Icon(Icons.arrow_forward_ios, size: 48, color: currentIndex < widget.photos.length - 1 ? Colors.white : Colors.white54),
-              onPressed: currentIndex < widget.photos.length - 1 ? _goToNext : null,
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: 48,
+                color:
+                    currentIndex < widget.photos.length - 1
+                        ? Colors.white
+                        : Colors.white54,
+              ),
+              onPressed:
+                  currentIndex < widget.photos.length - 1 ? _goToNext : null,
               tooltip: 'Next photo',
             ),
           ),

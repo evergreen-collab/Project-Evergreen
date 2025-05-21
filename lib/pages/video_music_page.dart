@@ -53,12 +53,24 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
       'videoUrl': 'assets/videos/another_fish.mp4',
     },
     {
-      'thumbnail': 'assets/images/JoyNest.png',
+      'thumbnail': 'assets/images/color_palete.png',
+      'videoUrl': 'assets/videos/color_palete.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/fish_catch.png',
+      'videoUrl': 'assets/videos/catch_fish.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/sample.png',
       'videoUrl': 'assets/videos/sample_video.mp4',
     },
     {
-      'thumbnail': 'assets/images/JoyNest.png',
-      'videoUrl': 'assets/videos/sample_video.mp4',
+      'thumbnail': 'assets/images/studio.png',
+      'videoUrl': 'assets/videos/studio_video.mp4',
+    },
+    {
+      'thumbnail': 'assets/images/another_fish.png',
+      'videoUrl': 'assets/videos/another_fish.mp4',
     },
     {
       'thumbnail': 'assets/images/color_palete.png',
