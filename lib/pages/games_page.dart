@@ -21,7 +21,74 @@ Color getGridButtonColor(BuildContext context, Color color) {
 }
 
 class GamesPage extends StatelessWidget {
-  const GamesPage({super.key});
+  GamesPage({super.key});
+
+  final List<Map<String, dynamic>> games = [
+    {
+      'icon': Icons.grid_3x3_outlined,
+      'label': 'Tic Tac Toe',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.teal,
+    },
+    {
+      'icon': Icons.crop_square,
+      'label': 'Memory',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.deepOrange,
+    },
+    {
+      'icon': Icons.question_mark,
+      'label': 'Higher Lower Game',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.blue,
+    },
+    {
+      'icon': Icons.grid_on,
+      'label': 'Sudoku',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.purple,
+    },
+    {
+      'icon': Icons.add,
+      'label': '2048',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.green,
+    },
+    {
+      'icon': Icons.link,
+      'label': 'Connect Four',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.red,
+    },
+    {
+      'icon': Icons.play_arrow,
+      'label': 'Simon Says',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.orange,
+    },
+    {
+      'icon': Icons.text_fields,
+      'label': 'Hangman',
+      'onTap': () {
+        // Add your navigation or game logic here
+      },
+      'color': Colors.blueAccent,
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,26 +118,15 @@ class GamesPage extends StatelessWidget {
                     crossAxisCount: 3,
                     mainAxisSpacing: padding,
                     crossAxisSpacing: padding,
-                    children: [
-                      EvergreenGridButton(
-                        icon: Icons.grid_3x3_outlined,
-                        label: 'Tic Tac Toe',
-                        onTap: () {},
-                        color: getGridButtonColor(context, Colors.teal),
-                      ),
-                      EvergreenGridButton(
-                        icon: Icons.crop_square,
-                        label: 'Memory',
-                        onTap: () {},
-                        color: getGridButtonColor(context, Colors.deepOrange),
-                      ),
-                      EvergreenGridButton(
-                        icon: Icons.question_mark,
-                        label: 'Higher lower game',
-                        onTap: () {},
-                        color: getGridButtonColor(context, Colors.blue),
-                      ),
-                    ],
+                    children:
+                        games.map((game) {
+                          return EvergreenGridButton(
+                            icon: game['icon'],
+                            label: game['label'],
+                            onTap: game['onTap'],
+                            color: getGridButtonColor(context, game['color']),
+                          );
+                        }).toList(),
                   ),
                 ),
               ),

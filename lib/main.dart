@@ -15,7 +15,6 @@ import 'providers/settings_provider.dart';
 import 'pages/emergency_page.dart';
 import 'package:evergreen/pages/contacts_page.dart';
 
-
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: true);
   if (settings.darkMode && !settings.highContrast) {
@@ -139,9 +138,7 @@ class EvergreenHomePage extends StatelessWidget {
                   label: 'Games',
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => const GamesPage(),
-                      ),
+                      MaterialPageRoute(builder: (context) => GamesPage()),
                     );
                   },
                   color: getGridButtonColor(context, Colors.deepOrange),
