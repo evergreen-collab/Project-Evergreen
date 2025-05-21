@@ -40,6 +40,8 @@ dependencies:
   video_player: ^2.8.2
   intl: ^0.18.0
   font_awesome_flutter: ^10.7.0
+  video_thumbnail: ^0.5.3
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:

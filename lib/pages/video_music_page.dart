@@ -88,6 +88,12 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
     final double buttonSize =
         MediaQuery.of(context).size.width < 600 ? 150 : 200;
 
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    final padding = MediaQuery.of(context).size.shortestSide * 0.02;
+
+    final gridHeight = ((allVideos.length / 4) + 1).floor() * 300;
+
     return Scaffold(
       appBar: JoyNestAppBar(showBackButton: true),
       body: Center(
@@ -163,8 +169,8 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
                               borderRadius: BorderRadius.circular(12),
                               child: Image.asset(
                                 video['thumbnail'],
-                                width: 150,
-                                height: 100,
+                                width: 300,
+                                height: 250,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -189,26 +195,53 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 16),
-              Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                alignment: WrapAlignment.center,
-                children:
-                    allVideos.map((video) {
-                      return GestureDetector(
-                        onTap: () => _openVideoDialog(video['videoUrl']),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.asset(
-                            video['thumbnail'],
-                            width: 150,
-                            height: 100,
-                            fit: BoxFit.cover,
-                          ),
+              SizedBox(
+                height: gridHeight.toDouble(), // Set a fixed height
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isLandscape ? 4 : 3,
+                    mainAxisSpacing: padding,
+                    crossAxisSpacing: padding,
+                  ),
+                  itemCount: allVideos.length,
+                  itemBuilder: (context, index) {
+                    final video = allVideos[index];
+                    return GestureDetector(
+                      onTap: () => _openVideoDialog(video['videoUrl']),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          video['thumbnail'],
+                          width: 150,
+                          height: 100,
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    }).toList(),
+                      ),
+                    );
+                  },
+                ),
               ),
+
+              // Wrap(
+              //   spacing: 16,
+              //   runSpacing: 16,
+              //   alignment: WrapAlignment.center,
+              //   children:
+              //       allVideos.map((video) {
+              //         return GestureDetector(
+              //           onTap: () => _openVideoDialog(video['videoUrl']),
+              //           child: ClipRRect(
+              //             borderRadius: BorderRadius.circular(12),
+              //             child: Image.asset(
+              //               video['thumbnail'],
+              //               width: 150,
+              //               height: 100,
+              //               fit: BoxFit.cover,
+              //             ),
+              //           ),
+              //         );
+              //       }).toList(),
+              // ),
             ],
           ),
         ),

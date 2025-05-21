@@ -115,7 +115,10 @@ class PhotoItem extends StatelessWidget {
                             icon: const Icon(Icons.close, color: Colors.black),
                             label: const Text(
                               'Close',
-                              style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 22,
+                              ),
                             ),
                           ),
                         ),
