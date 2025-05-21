@@ -1,3 +1,4 @@
+import 'package:evergreen/pages/medication_page.dart';
 import 'package:evergreen/pages/photos_page.dart';
 import 'package:evergreen/pages/video_music_page.dart';
 import 'package:flutter/material.dart';
@@ -187,16 +188,22 @@ class EvergreenHomePage extends StatelessWidget {
                   },
                   color: getGridButtonColor(context, Colors.deepOrangeAccent),
                 ),
-                 EvergreenGridButton(
-                   icon: Icons.emergency_rounded,
-                   label: 'Help & Emergency',
-                   onTap: () => Navigator.pushNamed(context, '/emergency'),
-                   color: getGridButtonColor(context, Colors.red),
-                 ),
+                EvergreenGridButton(
+                  icon: Icons.emergency_rounded,
+                  label: 'Help & Emergency',
+                  onTap: () => Navigator.pushNamed(context, '/emergency'),
+                  color: getGridButtonColor(context, Colors.red),
+                ),
                 EvergreenGridButton(
                   icon: Icons.medication_rounded,
                   label: 'Medication',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const MedicationPage(),
+                      ),
+                    );
+                  },
                   color: getGridButtonColor(context, Colors.teal),
                 ),
                 EvergreenGridButton(
