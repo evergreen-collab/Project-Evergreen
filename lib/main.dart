@@ -13,6 +13,8 @@ import 'widgets/evergreen_grid_button.dart';
 import 'pages/settings_page.dart';
 import 'providers/settings_provider.dart';
 import 'pages/emergency_page.dart';
+import 'package:evergreen/pages/contacts_page.dart';
+
 
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: true);
@@ -209,7 +211,13 @@ class EvergreenHomePage extends StatelessWidget {
                 EvergreenGridButton(
                   icon: Icons.people_rounded,
                   label: 'Contacts',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ContactsPage(),
+                      ),
+                    );
+                  },
                   color: getGridButtonColor(context, Colors.blue),
                 ),
               ],
