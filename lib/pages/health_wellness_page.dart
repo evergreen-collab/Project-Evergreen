@@ -7,7 +7,6 @@ import '../providers/settings_provider.dart';
 Color getGridButtonColor(BuildContext context, Color color) {
   final settings = Provider.of<SettingsProvider>(context, listen: false);
   if (settings.darkMode && !settings.highContrast) {
-    // Use lighter variants for dark mode
     if (color == Colors.teal) return Colors.teal[200]!;
     if (color == Colors.deepOrange) return Colors.deepOrange[200]!;
     if (color == Colors.blue) return Colors.lightBlue[200]!;
@@ -15,7 +14,6 @@ Color getGridButtonColor(BuildContext context, Color color) {
     if (color == Colors.green) return Colors.lightGreen[200]!;
     if (color == Colors.deepOrangeAccent) return Colors.orange[200]!;
     if (color == Colors.red) return Colors.red[200]!;
-    // Add more as needed
   }
   return color;
 }
@@ -28,9 +26,46 @@ class HealthWellnessPage extends StatefulWidget {
 }
 
 class _HealthWellnessPageState extends State<HealthWellnessPage> {
-  String steps = '2500';
-  String water = '1.2';
-  String meditation = '10';
+  final Map<String, String> values = {
+    'Steps': '2500',
+    'Water Intake': '1.2',
+    'Meditation': '10',
+    'Sleep Hours': '7.5',
+    'Calories': '1800',
+  };
+
+  final List<Map<String, dynamic>> cardData = [
+    {
+      'title': 'Steps',
+      'icon': Icons.directions_walk,
+      'color': Colors.teal,
+      'unit': 'steps',
+    },
+    {
+      'title': 'Water Intake',
+      'icon': Icons.local_drink,
+      'color': Colors.blue,
+      'unit': 'liters',
+    },
+    {
+      'title': 'Meditation',
+      'icon': Icons.self_improvement,
+      'color': Colors.purple,
+      'unit': 'minutes',
+    },
+    {
+      'title': 'Sleep Hours',
+      'icon': Icons.hotel,
+      'color': Colors.green,
+      'unit': 'hours',
+    },
+    {
+      'title': 'Calories',
+      'icon': Icons.local_fire_department,
+      'color': Colors.deepOrange,
+      'unit': 'kcal',
+    },
+  ];
 
   Future<void> _editValue({
     required String title,
@@ -46,17 +81,12 @@ class _HealthWellnessPageState extends State<HealthWellnessPage> {
             content: TextField(
               controller: controller,
               autofocus: true,
-              keyboardType: TextInputType.numberWithOptions(
-                decimal: true,
-              ), // allow decimals
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp(r'^\d*\.?\d*'),
-                ), // digits and optional decimal point
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
               ],
               decoration: const InputDecoration(border: OutlineInputBorder()),
             ),
-
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -78,70 +108,57 @@ class _HealthWellnessPageState extends State<HealthWellnessPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const JoyNestAppBar(showBackButton: true),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: const Text(
-                'Daily Summary',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Steps
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.directions_walk, color: Colors.teal),
-                title: const Text('Steps Today'),
-                subtitle: Text('$steps steps'),
-                onTap:
-                    () => _editValue(
-                      title: 'Steps',
-                      initialValue: steps,
-                      onSave: (newValue) => setState(() => steps = newValue),
-                    ),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // Water
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.local_drink, color: Colors.blue),
-                title: const Text('Water Intake'),
-                subtitle: Text('$water liters'),
-                onTap:
-                    () => _editValue(
-                      title: 'Water Intake',
-                      initialValue: water,
-                      onSave: (newValue) => setState(() => water = newValue),
-                    ),
-              ),
-            ),
-            const SizedBox(height: 10),
-
-            // Meditation
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.self_improvement,
-                  color: Colors.purple,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Center(
+                child: Text(
+                  'Daily Summary',
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
-                title: const Text('Meditation'),
-                subtitle: Text('$meditation minutes'),
-                onTap:
-                    () => _editValue(
-                      title: 'Meditation',
-                      initialValue: meditation,
-                      onSave:
-                          (newValue) => setState(() => meditation = newValue),
-                    ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              ...cardData.map((data) {
+                final title = data['title'] as String;
+                final icon = data['icon'] as IconData;
+                final color = data['color'] as Color;
+                final unit = data['unit'] as String;
+
+                return Column(
+                  children: [
+                    Card(
+                      child: ListTile(
+                        leading: Icon(
+                          icon,
+                          color: getGridButtonColor(context, color),
+                        ),
+                        title: Text(
+                          title,
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                        subtitle: Text(
+                          '${values[title]} $unit',
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        onTap:
+                            () => _editValue(
+                              title: title,
+                              initialValue: values[title]!,
+                              onSave:
+                                  (newValue) =>
+                                      setState(() => values[title] = newValue),
+                            ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                );
+              }).toList(),
+            ],
+          ),
         ),
       ),
     );

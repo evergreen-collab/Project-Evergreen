@@ -8,13 +8,41 @@ class TravelSport extends StatelessWidget {
 
   static List<Map<String, dynamic>> items = [
     {'icon': Icons.tour, 'title': 'Virtual Tour', 'color': Color(0xFFfe921f)},
-    {'icon': Icons.sports_esports, 'title': 'E-sport', 'color': Color(0xFF0e86fe)},
-    {'icon': Icons.travel_explore, 'title': "Today's Travel", 'color': Color(0xFFfe6309)},
-    {'icon': Icons.music_note, 'title': 'Live Concert', 'color': Color(0xFF8838f8)},
-    {'icon': Icons.theater_comedy, 'title': 'Virtual Theater', 'color': Color(0xFFfe5a36)},
-    {'icon': Icons.event, 'title': 'Cultural Festival', 'color': Color(0xFF0abe50)},
-    {'icon': Icons.favorite, 'title': 'My Favorite Trip', 'color': Color.fromARGB(255, 255, 0, 0)},
-    {'icon': Icons.emoji_events, 'title': 'Local Sports', 'color': Color.fromARGB(255, 253, 234, 59)},
+    {
+      'icon': Icons.sports_esports,
+      'title': 'E-sport',
+      'color': Color(0xFF0e86fe),
+    },
+    {
+      'icon': Icons.travel_explore,
+      'title': "Today's Travel",
+      'color': Color(0xFFfe6309),
+    },
+    {
+      'icon': Icons.music_note,
+      'title': 'Live Concert',
+      'color': Color(0xFF8838f8),
+    },
+    {
+      'icon': Icons.theater_comedy,
+      'title': 'Virtual Theater',
+      'color': Color(0xFFfe5a36),
+    },
+    {
+      'icon': Icons.event,
+      'title': 'Cultural Festival',
+      'color': Color(0xFF0abe50),
+    },
+    {
+      'icon': Icons.favorite,
+      'title': 'My Favorite Trip',
+      'color': Color.fromARGB(255, 255, 0, 0),
+    },
+    {
+      'icon': Icons.emoji_events,
+      'title': 'Local Sports',
+      'color': Color.fromARGB(255, 253, 234, 59),
+    },
   ];
 
   @override
@@ -47,10 +75,7 @@ class TravelSport extends StatelessWidget {
                       ),
                       title: Text(
                         items[index]['title'],
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 20,
-                        ),
+                        style: TextStyle(color: textColor, fontSize: 24),
                       ),
                       trailing: Icon(
                         Icons.arrow_forward,

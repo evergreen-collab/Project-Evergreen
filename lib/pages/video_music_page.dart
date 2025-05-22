@@ -151,7 +151,7 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
                               const SizedBox(height: 8),
                               Text(
                                 category['title'],
-                                style: const TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 20),
                                 textAlign: TextAlign.center,
                               ),
                             ],
@@ -193,7 +193,10 @@ class _VideoMusicSubpageState extends State<VideoMusicPage> {
                               child: Text(
                                 video['title'],
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ],

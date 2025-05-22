@@ -165,7 +165,7 @@ class EvergreenHomePage extends StatelessWidget {
                 ),
                 EvergreenGridButton(
                   icon: Icons.airplanemode_on_rounded,
-                  label: 'Travel & Sports',
+                  label: 'Travel \n& Sports',
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
@@ -177,7 +177,7 @@ class EvergreenHomePage extends StatelessWidget {
                 ),
                 EvergreenGridButton(
                   icon: Icons.ondemand_video_rounded,
-                  label: 'Video & Music',
+                  label: 'Video \n& Music',
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(

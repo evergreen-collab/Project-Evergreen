@@ -69,7 +69,7 @@ class _MedicationPageState extends State<MedicationPage> {
             const Center(
               child: Text(
                 "How are you feeling today?",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 16),
@@ -78,7 +78,7 @@ class _MedicationPageState extends State<MedicationPage> {
             const Center(
               child: Text(
                 "Medication",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 16),
@@ -97,7 +97,7 @@ class _MedicationPageState extends State<MedicationPage> {
             const Center(
               child: Text(
                 "Doctor Appointments",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 16),
@@ -261,7 +261,7 @@ class MedicationCard extends StatelessWidget {
                     Text(
                       medication.name,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 21,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -276,15 +276,15 @@ class MedicationCard extends StatelessWidget {
                   children: [
                     Text(
                       '💊 Amount: ${medication.amount}',
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     Text(
                       '⏱️ Last taken: ${medication.lastTaken != null ? DateFormat('HH:mm').format(medication.lastTaken!) : 'Not taken yet'}',
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     Text(
                       '⏰ Next scheduled: ${medication.nextTime}',
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     if (!medication.isTakenNow) ...[
                       Row(
@@ -294,7 +294,7 @@ class MedicationCard extends StatelessWidget {
                               onPressed: onTaken,
                               child: const Text(
                                 "Mark as taken now",
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(fontSize: 19),
                               ),
                             ),
                           ),
@@ -366,7 +366,7 @@ class AppointmentCard extends StatelessWidget {
                   Text(
                     appointment.doctor,
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 21,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -381,15 +381,15 @@ class AppointmentCard extends StatelessWidget {
                 children: [
                   Text(
                     '🏥 Specialization: ${appointment.specialization}',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 20),
                   ),
                   Text(
                     '📅 Time: ${DateFormat('yyyy-MM-dd HH:mm').format(appointment.time)}',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 20),
                   ),
                   Text(
                     '📍 Location: ${appointment.location}',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ],
               ),
