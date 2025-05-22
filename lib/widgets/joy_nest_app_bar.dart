@@ -18,10 +18,15 @@ class JoyNestAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 180,
       leading:
           showBackButton
-              ? IconButton(
-                icon: const Icon(Icons.arrow_back, size: 40),
-                onPressed: onBack ?? () => Navigator.of(context).pop(),
-                tooltip: 'Back',
+              ? Padding(
+                padding: const EdgeInsets.all(
+                  8.0,
+                ), // Adjust the padding as needed
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back, size: 40),
+                  onPressed: onBack ?? () => Navigator.of(context).pop(),
+                  tooltip: 'Back',
+                ),
               )
               : Padding(
                 padding: const EdgeInsets.all(5.0),
